@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">db_siakad</database>
+</source>
+<canvas zoom="85">
+<tables>
+<table name="tb_dosen_bimbingan" view="colnames">
+<left>0</left>
+<top>0</top>
+<width>136</width>
+<height>235</height>
+<sql_create_table>CREATE TABLE `tb_dosen_bimbingan` (
+  `id_bimbingan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
+  `nama_dosen` varchar(30) DEFAULT NULL,
+  `jenis_bimbingan` enum('Skripsi','Judul') DEFAULT NULL,
+  `no_sk` varchar(20) DEFAULT NULL,
+  `tgl_sk` date DEFAULT NULL,
+  `status` enum('Selesai','Sedang Jalan','Dialihkan') DEFAULT NULL,
+  `ket_bimbingan` text,
+  `status_bimbingan` enum('Aktif','Tidak') DEFAULT NULL,
+  `proses_di` enum('1','2','3','4','5','6','7','8') DEFAULT NULL,
+  PRIMARY KEY (`id_bimbingan`),
+  KEY `id_pengajuanskripsi` (`id_pengajuanskripsi`),
+  KEY `id_mhs` (`id_mhs`),
+  KEY `id_dosen` (`id_dosen`),
+  CONSTRAINT `tb_dosen_bimbingan_ibfk_1` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_dosen_bimbingan_ibfk_3` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_dosen_bimbingan_ibfk_4` FOREIGN KEY (`id_dosen`) REFERENCES `tb_dosen` (`id_dosen`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_dosen" view="colnames">
+<left>164</left>
+<top>4</top>
+<width>152</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_dosen` (
+  `id_dosen` int(11) NOT NULL AUTO_INCREMENT,
+  `id_prodi` int(11) NOT NULL,
+  `nidn` varchar(20) DEFAULT NULL,
+  `nik` varchar(20) NOT NULL,
+  `nama_dosen` varchar(50) DEFAULT NULL,
+  `gelar_depan` varchar(4) DEFAULT NULL,
+  `gelar_belakang` varchar(20) DEFAULT NULL,
+  `jabatan_akademik` enum('Tenaga Pengajar','Asisten Ahli','Lektor','Lektor Kepala','Profesor') DEFAULT NULL,
+  `golongan_kepangkatan` enum('III A','III B','III C','III D','IV A','IV B','IV C','IV D','IV E') DEFAULT NULL,
+  `agama` enum('Islam','Protestan','Katolik','Hindu','Budha','Kong Hu Cu') DEFAULT NULL,
+  `tempat_lahir` varchar(50) DEFAULT NULL,
+  `tgl_lahir` date DEFAULT NULL,
+  `jk` enum('P','W') NOT NULL DEFAULT 'P',
+  `ikatan_kerja` enum('Dosen Tetap','Dosen Tidak Tetap','Dosen Dengan Perjanjian Kerja','Dosen PNS DPK') NOT NULL DEFAULT 'Dosen Tetap',
+  `status_aktif` enum('Aktif','Tidak Aktif','Cuti','Ijin Belajar','Tugas Belajar','Tugas di Instansi Lain') NOT NULL DEFAULT 'Aktif',
+  `pendidikan_terakhir` enum('D3','D4','S1','S2','S3') DEFAULT NULL,
+  `bidang_ilmu` varchar(50) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_dosen`),
+  KEY `id_prodi` (`id_prodi`),
+  KEY `userdosen` (`id_user`),
+  CONSTRAINT `tb_dosen_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `tb_prodi` (`id_prodi`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `userdosen` FOREIGN KEY (`id_user`) REFERENCES `b_users` (`id_user`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_mahasiswa" view="colnames">
+<left>351</left>
+<top>3</top>
+<width>139</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_mahasiswa` (
+  `id_mhs` int(11) NOT NULL AUTO_INCREMENT,
+  `npm` char(9) DEFAULT NULL,
+  `nik_mhs` int(11) DEFAULT NULL,
+  `status_aktif` enum('Aktif','Non Aktif','Cuti','Lulus','Keluar','Mengundurkan Diri','Mati') DEFAULT NULL,
+  `nama_mhs` varchar(50) DEFAULT NULL,
+  `jk` enum('Laki-Laki','Perempuan') DEFAULT NULL,
+  `provlahir_mhs` varchar(50) DEFAULT NULL,
+  `kotalahir_mhs` varchar(50) DEFAULT NULL,
+  `tempatlahir_mhs` varchar(50) DEFAULT NULL,
+  `tgllahir_mhs` varchar(20) DEFAULT NULL,
+  `gol_darah` char(2) DEFAULT NULL,
+  `tb` int(11) DEFAULT NULL,
+  `bb` int(11) DEFAULT NULL,
+  `buta_warna` enum('ya','tidak') DEFAULT NULL,
+  `kacamata` enum('ya','tidak') DEFAULT NULL,
+  `kondisi_gigi` enum('lengkap','tidak_lengkap') DEFAULT NULL,
+  `foto` varchar(50) DEFAULT NULL,
+  `id_prodi` int(11) DEFAULT NULL,
+  `periode_msk` varchar(50) DEFAULT NULL,
+  `angkatan` year(4) DEFAULT NULL,
+  `no_tes` int(11) DEFAULT NULL,
+  `jalur_masuk` varchar(20) DEFAULT NULL,
+  `tgl_daftar` date DEFAULT NULL,
+  `gel_daftar` varchar(20) DEFAULT NULL,
+  `status_mhs` enum('calon_mahasiswa','mahasiswa') DEFAULT NULL,
+  `status_masuk` enum('mahasiswa_baru','mahasiswa_pindahan') DEFAULT NULL,
+  `agama` enum('Islam','Kristen','Katolik','Hindu','Budha','Konghucu') DEFAULT NULL,
+  `status_menikah` enum('Menikah','Belum Menikah') DEFAULT NULL,
+  `kewarganegaraan` enum('WNI','WNA') DEFAULT NULL,
+  `status_rumah` varchar(20) DEFAULT NULL,
+  `prov_tinggal` varchar(50) DEFAULT NULL,
+  `kota_tinggal` varchar(30) DEFAULT NULL,
+  `alamat_tinggal` varchar(50) DEFAULT NULL,
+  `kel_tinggal` varchar(50) DEFAULT NULL,
+  `kec_tinggal` varchar(50) DEFAULT NULL,
+  `kode_pos_tiggal` int(11) DEFAULT NULL,
+  `negara` varchar(30) DEFAULT NULL,
+  `tlp_mhs` varchar(20) DEFAULT NULL,
+  `alat_transportasi` enum('Kendaraan Pribadi','Kendaraan Umum') DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `persyaratan` enum('lengkap','belum lengkap') DEFAULT 'belum lengkap',
+  `hub_biaya` varchar(30) DEFAULT NULL,
+  `s_dana` varchar(30) DEFAULT NULL,
+  `s_dana_beasiswa` varchar(30) DEFAULT NULL,
+  `penerima_kps` enum('ya','tidak') DEFAULT NULL,
+  `saudara_laki` int(11) DEFAULT NULL,
+  `saudara_perempuan` int(11) DEFAULT NULL,
+  `status_bekerja` enum('ya','tidak') DEFAULT NULL,
+  `jenis_pekerjaan` varchar(20) DEFAULT NULL,
+  `institusi_kantor` varchar(30) DEFAULT NULL,
+  `alamat_kantor` varchar(50) DEFAULT NULL,
+  `npwp_mhs` varchar(30) DEFAULT NULL,
+  `no_asuransi` varchar(30) DEFAULT NULL,
+  `hobi` varchar(30) DEFAULT NULL,
+  `tahu_kampus` varchar(30) DEFAULT NULL,
+  `nim_lama` varchar(10) DEFAULT NULL,
+  `pt_asal` varchar(30) DEFAULT NULL,
+  `pt_lain` varchar(30) DEFAULT NULL,
+  `ps_asal` varchar(30) DEFAULT NULL,
+  `ps_asallain` varchar(30) DEFAULT NULL,
+  `jenjang_ps_asal` varchar(20) DEFAULT NULL,
+  `th_masuk_pt` year(4) DEFAULT NULL,
+  `nik_ayah` int(11) DEFAULT NULL,
+  `nama_ayah` varchar(30) DEFAULT NULL,
+  `tgl_lahir_ayah` varchar(20) DEFAULT NULL,
+  `ayah_meninggal` enum('ya','tidak') DEFAULT NULL,
+  `tgl_meninggal_ayah` date DEFAULT NULL,
+  `pdkan_ayah` varchar(20) DEFAULT NULL,
+  `pdkan_akhir_ayah` varchar(20) DEFAULT NULL,
+  `pekerjaan_ayah` varchar(20) DEFAULT NULL,
+  `penghasilan_ayah` varchar(20) DEFAULT NULL,
+  `nik_ibu` int(11) DEFAULT NULL,
+  `nama_ibu` varchar(20) DEFAULT NULL,
+  `tgl_lahir_ibu` date DEFAULT NULL,
+  `ibu_meninggal` enum('ya','tidak') DEFAULT NULL,
+  `tgl_meninggal_ibu` date DEFAULT NULL,
+  `pdkan_ibu` varchar(20) DEFAULT NULL,
+  `pdkan_akhir_ibu` varchar(20) DEFAULT NULL,
+  `pekerjaan_ibu` varchar(20) DEFAULT NULL,
+  `penghasila_ibu` varchar(20) DEFAULT NULL,
+  `agama_ortu` varchar(20) DEFAULT NULL,
+  `wn_ortu` enum('wna','wni') DEFAULT NULL,
+  `alamat_ortu` varchar(50) DEFAULT NULL,
+  `alamat_ktr_ayah` varchar(50) DEFAULT NULL,
+  `prov_ortu` varchar(30) DEFAULT NULL,
+  `kota_ortu` varchar(30) DEFAULT NULL,
+  `kode_pos_ortu` int(11) DEFAULT NULL,
+  `tlp_ortu` varchar(15) NOT NULL,
+  `email_ortu` varchar(30) DEFAULT NULL,
+  `nik_wali` varchar(50) NOT NULL,
+  `nama_wali` varchar(30) DEFAULT NULL,
+  `tgl_lahir_wali` varchar(20) DEFAULT NULL,
+  `wali_meninggal` enum('ya','tidak') DEFAULT NULL,
+  `alamat_wali` varchar(50) DEFAULT NULL,
+  `prov_wali` varchar(30) DEFAULT NULL,
+  `kota_wali` varchar(30) DEFAULT NULL,
+  `tlp_wali` int(11) DEFAULT NULL,
+  `email_wali` varchar(30) DEFAULT NULL,
+  `pdkan_wali` varchar(20) DEFAULT NULL,
+  `pdkan_akhir_wali` varchar(20) DEFAULT NULL,
+  `pekerjaan_wali` varchar(20) DEFAULT NULL,
+  `penghasilan_wali` varchar(20) DEFAULT NULL,
+  `thn_dftr_smta` year(4) DEFAULT NULL,
+  `thn_lls_smta` year(4) DEFAULT NULL,
+  `kelas_smta` varchar(20) DEFAULT NULL,
+  `jrsan_smta` varchar(20) DEFAULT NULL,
+  `jenis_smta` varchar(20) DEFAULT NULL,
+  `pilih_smta` varchar(20) DEFAULT NULL,
+  `nama_smtalain` varchar(20) DEFAULT NULL,
+  `prov_smta` varchar(30) DEFAULT NULL,
+  `alamat_smta` varchar(50) DEFAULT NULL,
+  `lulus_smta` year(4) DEFAULT NULL,
+  `no_ijazah` varchar(20) DEFAULT NULL,
+  `nisn` int(11) DEFAULT NULL,
+  `status_smta` enum('negeri','swasta','agama') DEFAULT NULL,
+  `akreditasi_smta` varchar(20) DEFAULT NULL,
+  `nilai_un` double DEFAULT NULL,
+  `nilai_mtk` double DEFAULT NULL,
+  `nilai_bing` double DEFAULT NULL,
+  `status_kel` enum('menikah','belum_menikah') DEFAULT NULL,
+  `keb_khusus_mhs` text,
+  `keb_khusus_ayah` text,
+  `keb_khusus_ibu` text,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_mhs`),
+  UNIQUE KEY `npm` (`npm`),
+  KEY `id_prodi` (`id_prodi`),
+  CONSTRAINT `prodimahasiswa` FOREIGN KEY (`id_prodi`) REFERENCES `tb_prodi` (`id_prodi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_semester" view="colnames">
+<left>496</left>
+<top>3</top>
+<width>117</width>
+<height>178</height>
+<sql_create_table>CREATE TABLE `tb_semester` (
+  `id_semester` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_semester` enum('Ganjil','SP Ganjil','Genap','SP Genap') NOT NULL DEFAULT 'Ganjil',
+  `tahun_ajaran` varchar(9) NOT NULL,
+  `waktu_kuliah` enum('Reguler','Extensi','Sabtu-Minggu') NOT NULL DEFAULT 'Reguler',
+  `tgl_mulai` date NOT NULL,
+  `tgl_selesai` date NOT NULL,
+  `aktif` enum('Aktif','Tidak','Proses') NOT NULL DEFAULT 'Tidak',
+  `lock` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_semester`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_semester_skripsi" view="colnames">
+<left>654</left>
+<top>3</top>
+<width>151</width>
+<height>105</height>
+<sql_create_table>CREATE TABLE `tb_semester_skripsi` (
+  `id_detsemester_skripsi` int(11) NOT NULL AUTO_INCREMENT,
+  `id_skripsi_setbiaya` int(11) NOT NULL,
+  `id_semester` int(11) NOT NULL,
+  PRIMARY KEY (`id_detsemester_skripsi`),
+  KEY `stsemeseter` (`id_semester`),
+  KEY `biayastset` (`id_skripsi_setbiaya`),
+  CONSTRAINT `tb_detbiayata` FOREIGN KEY (`id_skripsi_setbiaya`) REFERENCES `tb_skripsi_setbiaya` (`id_skripsi_setbiaya`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_semester_skripsi_ibfk_1` FOREIGN KEY (`id_semester`) REFERENCES `tb_semester` (`id_semester`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_sk" view="colnames">
+<left>167</left>
+<top>317</top>
+<width>94</width>
+<height>192</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_sk` (
+  `id_sk` int(11) NOT NULL AUTO_INCREMENT,
+  `no_sk` varchar(50) DEFAULT NULL,
+  `tgl_sk` date DEFAULT NULL,
+  `file_sk` varchar(100) DEFAULT NULL,
+  `jenis_sk` enum('Perubahan Pembimbing','Sidang Proposal','Sidang Skripsi','Baru') DEFAULT NULL,
+  `pejabat_ttd` varchar(100) DEFAULT NULL,
+  `tgl_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_fakultas` int(11) DEFAULT NULL,
+  `id_prodi` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_sk`),
+  KEY `id_prodi` (`id_prodi`),
+  KEY `id_fakultas` (`id_fakultas`),
+  CONSTRAINT `tb_skripsi_sk_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `tb_prodi` (`id_prodi`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_sk_ibfk_2` FOREIGN KEY (`id_fakultas`) REFERENCES `tb_fakultas` (`id_fakultas`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_prodi" view="colnames">
+<left>366</left>
+<top>507</top>
+<width>122</width>
+<height>235</height>
+<sql_create_table>CREATE TABLE `tb_prodi` (
+  `id_prodi` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_prodiDIKTI` varchar(20) NOT NULL,
+  `nama_prodi` varchar(50) NOT NULL,
+  `id_fakultas` int(11) NOT NULL,
+  `jenjang` enum('S3','S2','S1','D3') NOT NULL,
+  `keterangan` text,
+  `kurikulum` text,
+  `peta_kurikulum` varchar(50) DEFAULT NULL,
+  `profil_lulusan` text,
+  `link` varchar(100) NOT NULL,
+  `aktif` enum('Ya','Tidak') NOT NULL DEFAULT 'Ya',
+  `judul_seo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_prodi`),
+  KEY `prodifak` (`id_fakultas`),
+  CONSTRAINT `prodifak` FOREIGN KEY (`id_fakultas`) REFERENCES `tb_fakultas` (`id_fakultas`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_skb_detail" view="colnames">
+<left>524</left>
+<top>408</top>
+<width>136</width>
+<height>120</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_skb_detail` (
+  `id_detailsk` int(11) NOT NULL AUTO_INCREMENT,
+  `no_sk` varchar(50) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_detailsk`),
+  KEY `tb_skripsi_skb_detail_ibfk_1` (`no_sk`),
+  KEY `id_pengajuanskripsi` (`id_pengajuanskripsi`),
+  CONSTRAINT `tb_skripsi_skb_detail_ibfk_1` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_skp_detail" view="colnames">
+<left>358</left>
+<top>329</top>
+<width>136</width>
+<height>134</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_skp_detail` (
+  `id_skp_detail` int(11) NOT NULL AUTO_INCREMENT,
+  `no_sk` varchar(30) DEFAULT NULL,
+  `id_pergantian` int(11) DEFAULT NULL,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_skp_detail`),
+  KEY `id_pengajuanskripsi` (`id_pengajuanskripsi`),
+  KEY `id_pergantian` (`id_pergantian`),
+  CONSTRAINT `tb_skripsi_skp_detail_ibfk_1` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_skp_detail_ibfk_2` FOREIGN KEY (`id_pergantian`) REFERENCES `tb_skripsi_pergantian` (`id_pergantian`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skskripsi_detail" view="colnames">
+<left>697</left>
+<top>422</top>
+<width>128</width>
+<height>120</height>
+<sql_create_table>CREATE TABLE `tb_skskripsi_detail` (
+  `id_detailsk` int(11) NOT NULL AUTO_INCREMENT,
+  `id_dosen` int(11) NOT NULL,
+  `id_pengajuanjudul` int(11) NOT NULL,
+  `no_sk` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id_detailsk`),
+  KEY `tb_sk_detail` (`id_pengajuanjudul`),
+  CONSTRAINT `tb_sk_detail` FOREIGN KEY (`id_pengajuanjudul`) REFERENCES `tb_skripsi_sidangpro` (`id_sidangpro`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_pengajuanskripsi" view="colnames">
+<left>689</left>
+<top>150</top>
+<width>136</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_pengajuanskripsi` (
+  `id_pengajuanskripsi` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_semester` int(11) DEFAULT NULL,
+  `ipk` double DEFAULT NULL,
+  `sks_sementara` int(11) DEFAULT NULL,
+  `judul_1` varchar(200) DEFAULT NULL,
+  `judul_bing1` varchar(200) DEFAULT NULL,
+  `penjelasan_1` text,
+  `judul_2` varchar(200) DEFAULT NULL,
+  `judul_bing2` varchar(200) DEFAULT NULL,
+  `penjelasan_2` text,
+  `judul_acc` enum('Judul 1','Judul 2') DEFAULT NULL,
+  `tgl_pengajuan` datetime DEFAULT CURRENT_TIMESTAMP,
+  `sumber_judul` enum('Usulan Mahasiswa','Usulan Dosen') DEFAULT 'Usulan Mahasiswa',
+  `dosen_pengusul` varchar(30) DEFAULT NULL,
+  `tempat_penelitian` varchar(20) DEFAULT NULL,
+  `up_buktipkl` varchar(30) DEFAULT NULL,
+  `up_transkip` varchar(30) DEFAULT NULL,
+  `up_buktibayar` varchar(30) DEFAULT NULL,
+  `up_bayarsk` varchar(30) DEFAULT NULL,
+  `tgl_upbayarsk` datetime DEFAULT NULL,
+  `status_pengajuan` enum('Setujui','Tolak') DEFAULT NULL COMMENT 'judul yang diajukan diterima atau tidak',
+  `tgl_persetujuan` datetime DEFAULT NULL,
+  `keterangan` text,
+  `pengajuan_ke` int(11) DEFAULT NULL,
+  `status` enum('1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '1=insert 2=prosesbaaku 3=tolakbaaku 4=terimabaakulanjut 5=tolakaprodi 6= terimakaprodi 7=prosesbaaku/keuangan',
+  `status_byr` enum('1','0') DEFAULT '0',
+  PRIMARY KEY (`id_pengajuanskripsi`),
+  KEY `id_periodeskripsi` (`id_semester`),
+  KEY `id_mahasiswa` (`id_mhs`),
+  CONSTRAINT `tb_idsemesterbiaya` FOREIGN KEY (`id_semester`) REFERENCES `tb_semester` (`id_semester`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_pengajuanskripsi_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_pergantian" view="colnames">
+<left>161</left>
+<top>545</top>
+<width>148</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_pergantian` (
+  `id_pergantian` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_bimbingan` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `id_dosenlama` int(11) DEFAULT NULL,
+  `id_dosenbaru` int(11) DEFAULT NULL,
+  `pergantian_ke` int(11) DEFAULT NULL,
+  `status_pergantian` enum('Setujui','Tolak') DEFAULT NULL,
+  `alasan` text,
+  `proses_di` enum('1','2','3','4','5','6','7','8') DEFAULT NULL,
+  `ket_ganti` text,
+  `status_gantibimbingan` enum('aktif','tidak') DEFAULT NULL,
+  `no_skganti` varchar(50) DEFAULT NULL,
+  `tgl_diajukanganti` date DEFAULT NULL,
+  `tgl_persetujuanganti` date DEFAULT NULL,
+  PRIMARY KEY (`id_pergantian`),
+  KEY `id_mhs` (`id_mhs`),
+  KEY `id_bimbingan` (`id_bimbingan`),
+  CONSTRAINT `tb_skripsi_pergantian_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_pergantian_ibfk_2` FOREIGN KEY (`id_bimbingan`) REFERENCES `tb_dosen_bimbingan` (`id_bimbingan`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_perubahanjudul" view="colnames">
+<left>4</left>
+<top>252</top>
+<width>144</width>
+<height>250</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_perubahanjudul` (
+  `id_perubahanjudul` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `judul_lama` varchar(200) DEFAULT NULL,
+  `judul_baru` varchar(200) DEFAULT NULL,
+  `penjelasan_judulbaru` text,
+  `tgl_pengajuan` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `up_rekomendasipj` varchar(30) DEFAULT NULL COMMENT 'Jika Y judul diterima, jika kosong, judul belum dikoreksi, jika T judul di tolak',
+  `ket_perubahan` text,
+  `perubahan_ke` int(11) DEFAULT NULL,
+  `status_perubahan` enum('Setujui','Tolak') DEFAULT NULL,
+  `proses_di` enum('1','2','3','4','5','6','7','8') DEFAULT NULL,
+  `tgl_diajukan` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_perubahanjudul`),
+  KEY `id_judul` (`id_pengajuanskripsi`),
+  KEY `id_mahasiswa` (`id_mhs`),
+  CONSTRAINT `tb_skripsi_perubahanjudul_ibfk_1` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_perubahanjudul_ibfk_2` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_setbiaya" view="colnames">
+<left>521</left>
+<top>639</top>
+<width>139</width>
+<height>178</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_setbiaya` (
+  `id_skripsi_setbiaya` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_biaya_skripsi` varchar(30) NOT NULL,
+  `tgl_mulai_berlaku` date NOT NULL,
+  `biaya_normal` float NOT NULL,
+  `biaya_perpanjangan` float NOT NULL,
+  `status_setbiaya` enum('Aktif','Tidak') NOT NULL DEFAULT 'Tidak',
+  `tgl_setting` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_skripsi_setbiaya`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_setbiaya_detail" view="colnames">
+<left>729</left>
+<top>577</top>
+<width>132</width>
+<height>105</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_setbiaya_detail` (
+  `id_detail_setbiaya` int(11) NOT NULL AUTO_INCREMENT,
+  `id_skripsi_setbiaya` int(11) DEFAULT NULL,
+  `id_prodi` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_setbiaya`),
+  KEY `id_prodi` (`id_prodi`),
+  KEY `id_cuti_setbiaya` (`id_skripsi_setbiaya`),
+  CONSTRAINT `tb_skripsi_setbiaya_detail_ibfk_1` FOREIGN KEY (`id_skripsi_setbiaya`) REFERENCES `tb_skripsi_setbiaya` (`id_skripsi_setbiaya`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_setbiaya_detail_ibfk_2` FOREIGN KEY (`id_prodi`) REFERENCES `tb_prodi` (`id_prodi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_sidangpro" view="colnames">
+<left>912</left>
+<top>197</top>
+<width>152</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_sidangpro` (
+  `id_sidangpro` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `id_dosen_bimbingan` int(11) DEFAULT NULL,
+  `id_penguji` int(11) DEFAULT NULL,
+  `tgl_pengajuan_pro` date DEFAULT NULL,
+  `hari_sidang_pro` varchar(10) DEFAULT NULL,
+  `tgl_sidang_pro` date DEFAULT NULL,
+  `jam_sidang_pro` time DEFAULT NULL,
+  `up_daftar_pro` varchar(30) DEFAULT NULL,
+  `up_rekomendasi_pro` varchar(30) DEFAULT NULL,
+  `up_ppenguji_pro` varchar(30) DEFAULT NULL,
+  `up_pinjamruangan_pro` varchar(30) DEFAULT NULL,
+  `up_kartukendali_pro` varchar(30) DEFAULT NULL,
+  `up_kehadiran_pro` varchar(30) DEFAULT NULL,
+  `up_transkipnilai_pro` varchar(30) DEFAULT NULL,
+  `up_softcopy_pro` varchar(30) DEFAULT NULL,
+  `nilaipembimbing_pro` double DEFAULT NULL,
+  `nilaipenguji_pro` double DEFAULT NULL,
+  `nilai_pro` double DEFAULT NULL,
+  `sidangpro_ke` int(11) DEFAULT NULL,
+  `status_sidang_pro` enum('Lulus','Gagal') DEFAULT NULL,
+  `hurufmutu_pro` char(1) DEFAULT NULL,
+  `ket_sidang_pro` text,
+  `proses_di` enum('1','2','3','4','5','6','7','8') DEFAULT NULL,
+  `status_pengujipro` enum('Aktif','Tidak') DEFAULT NULL,
+  `s_sidangpro` enum('Setujui','Tolak') DEFAULT NULL,
+  `tgl_setujukaprodi` date DEFAULT NULL,
+  `up_nilai` varchar(50) DEFAULT NULL,
+  `status_nilaipro` enum('Setujui','Belum di Setujui') DEFAULT NULL,
+  PRIMARY KEY (`id_sidangpro`),
+  KEY `id_mhs` (`id_mhs`),
+  KEY `id_pengajuanskripsi` (`id_pengajuanskripsi`),
+  CONSTRAINT `tb_skripsi_sidangpro_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_sidangpro_ibfk_2` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tb_skripsi_sidangta" view="colnames">
+<left>917</left>
+<top>499</top>
+<width>145</width>
+<height>260</height>
+<sql_create_table>CREATE TABLE `tb_skripsi_sidangta` (
+  `id_sidangta` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mhs` int(11) DEFAULT NULL,
+  `id_pengajuanskripsi` int(11) DEFAULT NULL,
+  `tgl_pengajuansta` date DEFAULT NULL,
+  `id_dosen_bimbingan` int(11) DEFAULT NULL,
+  `id_pengujiproposal` int(11) DEFAULT NULL,
+  `id_penguji_ta` int(11) DEFAULT NULL,
+  `up_daftar_ta` varchar(30) DEFAULT NULL,
+  `up_rekomendasi_ta` varchar(30) DEFAULT NULL,
+  `up_bukti_pro` varchar(30) DEFAULT NULL,
+  `up_pinjamruangan_ta` varchar(30) DEFAULT NULL,
+  `up_bebasadmin_ta` varchar(30) DEFAULT NULL,
+  `up_kehadiran_ta` varchar(30) DEFAULT NULL,
+  `up_datadiri_ta` varchar(30) DEFAULT NULL,
+  `up_ijazah_ta` varchar(30) DEFAULT NULL,
+  `up_kartukendali_ta` varchar(30) DEFAULT NULL,
+  `up_transkipnilai_ta` varchar(30) DEFAULT NULL,
+  `up_softcopypoto` varchar(30) DEFAULT NULL,
+  `up_softcopy_ta` varchar(30) DEFAULT NULL,
+  `sidangta_ke` int(11) DEFAULT NULL,
+  `status_sidang_ta` enum('Lulus','Gagal') DEFAULT NULL,
+  `nilaipenguji_ta` double DEFAULT NULL,
+  `nilaipembimbing_ta` double DEFAULT NULL,
+  `nilai_sidang_ta` double DEFAULT NULL,
+  `hurufmutu_ta` char(1) DEFAULT NULL,
+  `proses_di` enum('1','2','3','4','5','6','7','8','9') DEFAULT NULL,
+  `ket_sidang_ta` text,
+  `tgl_setujutakaprodi` date DEFAULT NULL,
+  `status_pengujita` enum('Aktif','Tidak') DEFAULT NULL,
+  `s_sidangta` enum('Setujui','Tolak') DEFAULT NULL,
+  `up_nilaita` varchar(50) DEFAULT NULL,
+  `status_nilaita` enum('Setujui','Belum di Setujui') DEFAULT NULL,
+  PRIMARY KEY (`id_sidangta`),
+  KEY `id_mhs` (`id_mhs`),
+  KEY `id_pengajuanskripsi` (`id_pengajuanskripsi`),
+  CONSTRAINT `tb_skripsi_sidangta_ibfk_1` FOREIGN KEY (`id_mhs`) REFERENCES `tb_mahasiswa` (`id_mhs`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `tb_skripsi_sidangta_ibfk_2` FOREIGN KEY (`id_pengajuanskripsi`) REFERENCES `tb_skripsi_pengajuanskripsi` (`id_pengajuanskripsi`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

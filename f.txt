@@ -1,0 +1,3 @@
+Executed SQL Statement : show create table `db_siakad`.`tb_skripsi_setbiaya_detail` 
+Error Number : 2003 
+Error Message: Can't connect to MySQL server on 'localhost' (0) 
