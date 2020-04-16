@@ -146,7 +146,6 @@ class Keluarga extends CI_Controller {
 		}
 	}
 
-
     public function tambah_kk() {
         $data['page'] 			= "BAAKU";
 		$data['judul'] 			= "Tambah Data KK Baru";
@@ -168,8 +167,20 @@ class Keluarga extends CI_Controller {
         $data['cacat']=$this->M_informasi->getcacat();
         $data['sakit_menahun']=$this->M_informasi->getSakitMenahun();
         $data['cara_kb']=$this->M_informasi->getCarakb();
-
-
+        
 		$this->template->views('keluarga/tambah_kk', $data);
+    }
+
+    public function simpan_kk(){
+        if($_POST['id_cluster'] == 0) {
+            $max = $this->M_keluarga->getCountId_Cluster();
+            $id_cluster_new = $max + 1 ;
+            if($this->M_keluarga->simpanKKBaru($id_cluster_new) == TRUE) {
+                
+            }
+            redirect('Keluarga');
+        } else {
+
+        }
     }
 }

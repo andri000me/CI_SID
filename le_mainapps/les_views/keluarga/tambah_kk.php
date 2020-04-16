@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="card-header p-2">
 				</div><!-- /.card-header -->
 				<div class="card-body">
-					<form class="form-horizontal" action="" method="POST">
+					<form class="form-horizontal" action="<?php echo base_url(); ?>Keluarga/simpan_kk" method="POST">
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">NO KK</label>
 							<div class="col-sm-4">
@@ -33,6 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										placeholder="Masukan Alamat"></textarea>
                             </div>
 						</div>
+						<button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data</button>
 					</form>
 				</div><!-- /.card-body -->
 			</div>

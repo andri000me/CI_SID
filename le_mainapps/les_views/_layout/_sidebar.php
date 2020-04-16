@@ -24,7 +24,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview ">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
@@ -40,13 +40,13 @@
                 </a>
               </li>
               <li class="nav-item" >
-                <a href="./index2.html" class="nav-link" style="color:yellow;">
+                <a href="./index2.html" class="nav-link">
                   <i class="far fa-map nav-icon" ></i>
                   <p>Wilayah Administratif</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link" style="color:yellow;">
+                <a href="./index3.html" class="nav-link">
                   <i class="fa fa-sitemap nav-icon" ></i>
                   <p>Pemerintahan Desa</p>
                 </a>
@@ -64,31 +64,31 @@
             </a>
             <ul class="nav nav-treeview" style="font-size:14px; padding-left:18px;">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>penduduk" class="nav-link" style="color:#ff851b;">
+                <a href="<?php echo base_url(); ?>penduduk" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>Penduduk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>keluarga" class="nav-link" style="color:yellow;">
+                <a href="<?php echo base_url(); ?>keluarga" class="nav-link">
                   <i class="fa fa-users nav-icon"></i>
                   <p>Keluarga</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link" style="color:yellow;">
+                <a href="pages/layout/boxed.html" class="nav-link">
                   <i class="fa fa-venus-mars nav-icon"></i>
                   <p>Rumah Tangga</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link" style="color:yellow;">
+                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
                   <i class="fa fa-sitemap nav-icon"></i>
                   <p>Kelompok</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link" style="color:yellow;">
+                <a href="pages/layout/fixed-topnav.html" class="nav-link">
                   <i class="fa fa-podcast nav-icon"></i>
                   <p>Calon Pemilih</p>
                 </a>

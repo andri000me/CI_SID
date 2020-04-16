@@ -82,4 +82,34 @@ class M_informasi extends CI_model {
     {
         return $this->db->get('m_cacat')->result();
     }
+
+    public function getKeluarga()
+    {
+        return $this->db->get('data_keluarga')->result();
+    }
+
+    public function getKtpel()
+    {
+        return $this->db->get('m_penduduk_ktp')->result();
+    }
+
+    public function getStatusrekam()
+    {
+        return $this->db->get('m_penduduk_status_rekam')->result();
+    }
+
+    public function getJenisKelahiran()
+    {
+        return $this->db->get('m_penduduk_jenis_kelahiran')->result();
+    }
+
+    public function gettempatdilahirkan()
+    {
+        return $this->db->get('m_penduduk_tempat_dilahirkan')->result();
+    }
+    public function getPenolongkelahiran()
+    {
+        return $this->db->get('m_penduduk_penolong_dilahirkan')->result();
+    }
+    
 }

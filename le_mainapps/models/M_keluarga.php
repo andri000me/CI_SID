@@ -6,10 +6,13 @@ class M_keluarga extends CI_model {
     {
         $this->db->from('data_penduduk');
         $this->db->where('id', $nik_kepala);
-		return $this->db->get();
+        return $this->db->get(); 
     }
+
     public function getKeluarga() {
-        return $this->db->get('data_keluarga');
+        $this->db->from('data_keluarga');
+        $this->db->order_by('tgl_daftar', 'DESC');
+		return $this->db->get();
     }
 
     public function getDetail($id) {
@@ -142,5 +145,25 @@ class M_keluarga extends CI_model {
         $this->db->order_by('nama', 'ASC');
         $this->db->limit(10);
         return $this->db->get('data_penduduk')->result();
-	}
+    }
+    
+    public function getCountId_Cluster(){
+        $this->db->select_max('id_cluster');
+        $this->db->from('data_keluarga');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+           return $query->row('id_cluster');        
+        }else{
+           return 1;
+        }
+    }
+    function simpanKKBaru($id_cluster_new) {
+        $data = [
+            "no_kk" => $this->input->post('no_kk', true),
+            "nik_kepala" => $this->input->post('id', true),
+            "id_cluster" => $id_cluster_new
+        ];
+
+        $this->db->insert('data_keluarga', $data);
+    }
 }

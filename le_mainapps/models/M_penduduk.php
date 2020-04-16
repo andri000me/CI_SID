@@ -9,6 +9,13 @@ class M_penduduk extends CI_model {
 		return $this->db->get();
     }
 
+    // public function get_penduduk_list() {
+    //     $this->db->select('penduduk.*, keluarga.no_kk');
+    //     $this->db->from('data_penduduk penduduk');
+    //     $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
+    //     $this->db->order_by("penduduk.id", "DESC");
+    //     return $this->db->get();
+    // }
     public function getDetail($id) {
         $this->db->from('data_penduduk');
         $this->db->where('id', $id);
@@ -32,9 +39,9 @@ class M_penduduk extends CI_model {
     
     public function simpanPenduduk () {
         $data = [
-            "status_dasar" => $this->input->post('status_dasar', true),
+            // "status_dasar" => $this->input->post('status_dasar', true),
             "nik" => $this->input->post('nik', true),
-            "kk_level" => $this->input->post('kk_level', true),
+            // "kk_level" => $this->input->post('kk_level', true),
             "nama" => $this->input->post('nama', true),
             "id_rtm" => $this->input->post('id_rtm', true),
             "rtm_level" => $this->input->post('rtm_level', true),
@@ -63,8 +70,8 @@ class M_penduduk extends CI_model {
             "ktp_el" => $this->input->post('ktp_el', true),
             "status_rekam" => $this->input->post('status_rekam', true),
             "dokumen_pasport" => $this->input->post('dokumen_pasport', true),
-            "dokumen_kitas" => $this->input->post('dokument_kitas', true),
-            "tanggal_akhir_paspor" => $this->input->post('sex', true),
+            "dokumen_kitas" => $this->input->post('dokumen_kitas', true),
+            "tanggal_akhir_paspor" => $this->input->post('tanggal_akhir_paspor', true),
             "ayah_nik" => $this->input->post('ayah_nik', true),
             "nama_ayah" => $this->input->post('nama_ayah', true),
             "ibu_nik" => $this->input->post('ibu_nik', true),
@@ -77,6 +84,14 @@ class M_penduduk extends CI_model {
             "penolong_kelahiran" => $this->input->post('penolong_kelahiran', true),
             "berat_lahir" => $this->input->post('berat_lahir', true),
             "panjang_lahir" => $this->input->post('panjang_lahir', true),
+
+            "ktp_el" => $this->input->post('ktp_el', true),
+            "status_rekam" => $this->input->post('status_rekam', true),
+            "tempat_dilahirkan" => $this->input->post('tempat_dilahirkan', true),
+            "jenis_kelahiran" => $this->input->post('jenis_kelahiran', true),
+            "penolong_kelahiran" => $this->input->post('penolong_kelahiran', true),
+            "id_asuransi" => $this->input->post('id_asuransi', true),
+            "tag_id_card" => $this->input->post('tag_id_card', true),
             "id_cluster" => 0,
         ];
 
@@ -87,7 +102,7 @@ class M_penduduk extends CI_model {
         $data = [
             "status_dasar" => $this->input->post('status_dasar', true),
             "nik" => $this->input->post('nik', true),
-            "kk_level" => $this->input->post('kk_level', true),
+            // "kk_level" => $this->input->post('kk_level', true),
             "nama" => $this->input->post('nama', true),
             "id_rtm" => $this->input->post('id_rtm', true),
             "rtm_level" => $this->input->post('rtm_level', true),
@@ -116,8 +131,8 @@ class M_penduduk extends CI_model {
             "ktp_el" => $this->input->post('ktp_el', true),
             "status_rekam" => $this->input->post('status_rekam', true),
             "dokumen_pasport" => $this->input->post('dokumen_pasport', true),
-            "dokumen_kitas" => $this->input->post('dokument_kitas', true),
-            "tanggal_akhir_paspor" => $this->input->post('sex', true),
+            "dokumen_kitas" => $this->input->post('dokumen_kitas', true),
+            "tanggal_akhir_paspor" => $this->input->post('tanggal_akhir_paspor', true),
             "ayah_nik" => $this->input->post('ayah_nik', true),
             "nama_ayah" => $this->input->post('nama_ayah', true),
             "ibu_nik" => $this->input->post('ibu_nik', true),
@@ -130,6 +145,13 @@ class M_penduduk extends CI_model {
             "penolong_kelahiran" => $this->input->post('penolong_kelahiran', true),
             "berat_lahir" => $this->input->post('berat_lahir', true),
             "panjang_lahir" => $this->input->post('panjang_lahir', true),
+            "ktp_el" => $this->input->post('ktp_el', true),
+            "status_rekam" => $this->input->post('status_rekam', true),
+            "tempat_dilahirkan" => $this->input->post('tempat_dilahirkan', true),
+            "jenis_kelahiran" => $this->input->post('jenis_kelahiran', true),
+            "penolong_kelahiran" => $this->input->post('penolong_kelahiran', true),
+            "id_asuransi" => $this->input->post('id_asuransi', true),
+            "tag_id_card" => $this->input->post('tag_id_card', true),
         ];
 
         $this->db->where('id', $this->input->post('id'));
