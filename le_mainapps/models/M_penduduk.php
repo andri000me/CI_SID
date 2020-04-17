@@ -9,33 +9,69 @@ class M_penduduk extends CI_model {
 		return $this->db->get();
     }
 
-    // public function get_penduduk_list() {
-    //     $this->db->select('penduduk.*, keluarga.no_kk');
-    //     $this->db->from('data_penduduk penduduk');
-    //     $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
-    //     $this->db->order_by("penduduk.id", "DESC");
-    //     return $this->db->get();
-    // }
+    public function get_penduduk_list($id_kk) {
+        $this->db->select('penduduk.*, keluarga.no_kk');
+        $this->db->from('data_penduduk penduduk');
+        $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
+        $this->db->join('m_penduduk_hubungan rtm_level', 'rtm_level.id = penduduk.rtm_level');
+        $this->db->where('penduduk.id_kk', $id_kk);
+        $this->db->order_by("rtm_level.id", "ASC");
+        return $this->db->get()->result();
+    }
+
+    public function get_kepala_keluarga($id_kk) {
+        $this->db->select('penduduk.*, keluarga.no_kk');
+        $this->db->from('data_penduduk penduduk');
+        $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
+        $this->db->join('m_penduduk_hubungan rtm_level', 'rtm_level.id = penduduk.rtm_level');
+        $this->db->where('penduduk.id_kk', $id_kk);
+        $this->db->where('rtm_level.id', '2');
+        return $this->db->get();
+    }
     public function getDetail($id) {
         $this->db->from('data_penduduk');
         $this->db->where('id', $id);
 		return $this->db->get();
     }
 
+    function getJumlahkeluarga($id_kk){
+		$this->db->select('penduduk.*, keluarga.no_kk');
+        $this->db->from('data_penduduk penduduk');
+        $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
+        $this->db->join('m_penduduk_hubungan rtm_level', 'rtm_level.id = penduduk.rtm_level');
+        $this->db->where('penduduk.id_kk', $id_kk);
+        $this->db->order_by("rtm_level.id", "ASC");
+
+		return $this->db->count_all_results();
+	}
+
     //table
-	function getDetailPenduduk($nik) {
+	// function getDetailPenduduk($nik) {
+	// 	$this->db->from('data_penduduk');
+	// 	$this->db->where('nik', $nik);
+	// 	return $this->db->get();
+    // }
+
+    function getDetailPenduduk($nik) {
 		$this->db->from('data_penduduk');
 		$this->db->where('nik', $nik);
+		return $this->db->get()->result();;
+    }
+
+    //table
+	function getDetailKartuKeluarga($id_kk) {
+		$this->db->from('data_penduduk');
+		$this->db->where('id_kk', $id_kk);
 		return $this->db->get();
     }
 
-     //table
-	function getDetailKeluarga($id_cluster, $nik) {
-        $this->db->from('data_penduduk');
-        $this->db->where('nik !=', $nik);
-		$this->db->where('id_cluster', $id_cluster);
-		return $this->db->get();
-    }
+    //  //table
+	// function getDetailKeluarga($id_cluster, $nik) {
+    //     $this->db->from('data_penduduk');
+    //     $this->db->where('nik !=', $nik);
+	// 	$this->db->where('id_cluster', $id_cluster);
+	// 	return $this->db->get();
+    // }
     
     public function simpanPenduduk () {
         $data = [

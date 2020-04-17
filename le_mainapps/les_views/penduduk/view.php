@@ -41,16 +41,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
 				<tr>
 					<td style=" text-align:center"><?= $i++; ?></td>
-					<td style=" text-align:center"><?= $penduduk->nik; ?></td>
 					<td style=" text-align:center">
 						<a href="<?php echo base_url(); ?>penduduk/detail/<?= $penduduk->nik; ?>">
-							<?= $penduduk->nama; ?>
+							<?= $penduduk->nik; ?>
 						</a>
 					</td>
+					<td style=" text-align:center"><?= $penduduk->nama; ?></td>
 					<td style=" text-align:center">
 						<?php foreach ($keluarga as $row): ?>
 							<?php if ($row->id == $penduduk->id_kk): ?>
-								<?= $row->no_kk; ?>
+								
+								<a href="<?php echo base_url(); ?>penduduk/detail_kk/<?= $penduduk->id_kk; ?>/<?= $penduduk->nik; ?>">
+									<?= $row->no_kk; ?>
+								</a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						<?php if ($penduduk->id_kk == '0') { ?>
@@ -59,9 +62,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</td>
 					<td style=" text-align:center">
 						<?php if ($penduduk->sex== '1') { ?>
-						Pria
+							LAKI - LAKI
 						<?php } else if ($penduduk->sex== '2') {?>
-						Wanita
+							PEREMPUAN
 						<?php } ?>
 					</td>
 					<td style=" text-align:center"><?= $penduduk->nama_ayah; ?></td>
