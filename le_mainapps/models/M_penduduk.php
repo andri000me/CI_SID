@@ -25,7 +25,7 @@ class M_penduduk extends CI_model {
         $this->db->join('data_keluarga keluarga', 'keluarga.id = penduduk.id_kk');
         $this->db->join('m_penduduk_hubungan rtm_level', 'rtm_level.id = penduduk.rtm_level');
         $this->db->where('penduduk.id_kk', $id_kk);
-        $this->db->where('rtm_level.id', '2');
+        $this->db->where('rtm_level.nama', 'KEPALA KELUARGA');
         return $this->db->get();
     }
     public function getDetail($id) {
@@ -44,13 +44,6 @@ class M_penduduk extends CI_model {
 
 		return $this->db->count_all_results();
 	}
-
-    //table
-	// function getDetailPenduduk($nik) {
-	// 	$this->db->from('data_penduduk');
-	// 	$this->db->where('nik', $nik);
-	// 	return $this->db->get();
-    // }
 
     function getDetailPenduduk($nik) {
 		$this->db->from('data_penduduk');

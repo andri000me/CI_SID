@@ -6,7 +6,6 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 	$.widget.bridge('uibutton', $.ui.button)
-
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>l_asséts/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -43,7 +42,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
 	$(function () {
-		$("#example1").DataTable();
+		$("#example1").DataTable({
+			"ordering": false,
+		});
 		$('#example2').DataTable({
 			"paging": false,
 			"lengthChange": false,
@@ -103,11 +104,9 @@
 	$(document).ready(function () {
 		$(".title").autocomplete({
 			source: "<?php echo site_url('Keluarga/get_autocomplete/?');?>",
-
 			select: function (event, ui) {
 				$('#nama').val(ui.item.label);
 				$('[name="id"]').val(ui.item.id);
-				$('[name="alamat_sekarang"]').val(ui.item.alamat_sekarang);
 				$('[name="id_cluster"]').val(ui.item.id_cluster);
 			},
 			response: function (event, ui) {
@@ -121,7 +120,27 @@
 			}
 		});
 	});
-
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".tambah_anggota").autocomplete({
+			source: "<?php echo site_url('Keluarga/getPendudukBelumMemilikiKeluarga/?');?>",
+			select: function (event, ui) {
+				$('#nama').val(ui.item.label);
+				$('[name="id"]').val(ui.item.id);
+			},
+			response: function (event, ui) {
+				if (!ui.content.length) {
+					var noResult = {
+						value: "",
+						label: "Tidak Ditemukan"
+					};
+					ui.content.push(noResult);
+				}
+			}
+		});
+	});
+	
 </script>
 
 <script>
@@ -141,3 +160,6 @@
 	});
 
 </script>
+
+
+

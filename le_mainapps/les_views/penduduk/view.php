@@ -2,14 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <style>
-	table.table {
+	table.table-bordered {
 		font-size: 15px;
 	}
 
 </style>
 <div class="card">
 	<div class="card-header">
-		<a href="<?php echo base_url(); ?>Penduduk/tambah" class="btn btn-success btn-sm my-2 float-right">Tambah
+		<a href="<?php echo base_url(); ?>Penduduk/tambah" class="btn btn-success btn-sm my-2">Tambah
 			Penduduk</a>
 	</div>
 	<!-- /.card-header -->
@@ -17,21 +17,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"
 			data-title="<?= $this->session->flashdata('title'); ?>"></div>
 		<table id="data_penduduk" class="table table-bordered table-striped table-hover nowrap" width="0">
-			<thead>
+			<thead class="bg-primary">
 				<tr>
-					<th>No</th>
-					<th>NIK</th>
-					<th>Nama</th>
-					<th>No.KK</th>
-					<th>Jenis Kelamin</th>
-					<th>Nama Ayah</th>
-					<th>Nama Ibu</th>
-					<th>Alamat</th>
-					<th>Umur</th>
-					<th>Pekerjaan</th>
-					<th>Kawin</th>
-					<th>Tanggal Daftar</th>
-					<th>Opsi</th>
+					<th style=" text-align:center">No</th>
+					<th style=" text-align:center">NIK</th>
+					<th style=" text-align:center">Nama</th>
+					<th style=" text-align:center">No.KK</th>
+					<th style=" text-align:center">Jenis Kelamin</th>
+					<th style=" text-align:center">Nama Ayah</th>
+					<th style=" text-align:center">Nama Ibu</th>
+					<th style=" text-align:center">Alamat</th>
+					<th style=" text-align:center">Kawin</th>
+					<th style=" text-align:center">Pekerjaan</th>
+					<th style=" text-align:center">Tanggal Daftar</th>
+					<th style=" text-align:center">Opsi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -70,7 +69,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td style=" text-align:center"><?= $penduduk->nama_ayah; ?></td>
 					<td style=" text-align:center"><?= $penduduk->nama_ibu; ?></td>
 					<td style=" text-align:center"><?= $penduduk->alamat_sekarang; ?></td>
-					<td></td>
 					<td>
 						<?php foreach ($kawin as $row): ?>
 						<?php if ($row->id == $penduduk->status_kawin): ?>
@@ -88,9 +86,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td style=" text-align:center"><?=date("Y-m-d", strtotime($penduduk->created_at))?></td>
 					<td style="text-align:center">
 						<a href="<?php echo base_url(); ?>Penduduk/edit/<?= $penduduk->id; ?>"
-							class="btn btn-warning btn-sm" title="Perbarui">Perbarui</a>
+							class="btn btn-warning btn-xs" title="Perbarui"><i class="fa fa-edit"></i></a>
 						<a href="<?php echo base_url(); ?>Penduduk/hapus/<?= $penduduk->id; ?>"
-							class="btn btn-danger btn-sm tombol-hapus" title="Hapus">Hapus</a>
+							class="btn btn-danger btn-xs tombol-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
 					</td>
 				</tr>
 				<?php endforeach; ?>

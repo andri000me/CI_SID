@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="form-group">
 								<label>Hubungan Dalam Keluarga</label>
 								<select class="" name="rtm_level" required>
-									<option value="">Pilih RT Level</option>
+									<option value="">Pilih Hubungan Dalam Keluarga</option>
 									<?php foreach ($rtm_level as $row): ?>
 									<option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
 									<?php endforeach; ?>

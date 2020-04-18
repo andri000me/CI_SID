@@ -31,18 +31,9 @@
 							<div class="col-md-12">
 								<div class="box box-info">
 									<div class="box-header with-border">
-										<a href="" class="btn-sm btn-success"><i class="fa fa-plus"></i> Tambah
-											Anggota</a>
+										<a type="button" onclick="window.history.go(-1)" class="btn-sm btn-info" > <i class="fa fa-arrow-circle-left "></i> Kembali Ke Daftar Keluarga</a>
 										<a href="" class="btn-sm bg-purple" target="_blank"><i class="fa fa-print "></i>
 											Cetak</a>
-										<a href="" class="btn-sm bg-dark" target="_blank"><i class="fa fa-download"></i>
-											Unduh</a>
-										<a href="" class="btn-sm bg-warning" title="Rincian Anggota Keluarga">
-											<i class="fa fa-list-ol "></i> Rincian Daftar Anggota Keluarga
-										</a>
-										<a href="" class="btn-sm btn-info" title="Kembali Ke Daftar Anggota Keluarga">
-											<i class="fa fa-arrow-circle-left "></i> Kembali Ke Daftar Keluarga
-										</a>
 									</div>
 
 									<div class="box-header mt-5">

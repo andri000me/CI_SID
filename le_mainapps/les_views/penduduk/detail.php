@@ -16,9 +16,7 @@
 							<a href="<?php echo base_url(); ?>Penduduk/cetak/<?= $penduduk->id; ?>" class="btn-sm bg-purple mx-1 my-1" title="Cetak Biodata" target="_blank"><i
 									class="fa fa-print"></i>Cetak
 								Biodata</a>
-							<a href="<?php echo base_url(); ?>Penduduk" class="btn-sm btn-info mx-1 my-1" title="Kembali Ke Daftar Penduduk">
-								<i class="fa fa-arrow-circle-left"></i>Kembali
-							</a>
+							<a type="button" onclick="window.history.go(-1)" class="btn-sm btn-info mr-2" > <i class="fa fa-arrow-circle-left "></i> Kembali</a>
 						</div>
 					</div>
 				</div>

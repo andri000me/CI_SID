@@ -23,8 +23,8 @@ class Penduduk extends CI_Controller {
 		parent::__construct();
 		$this->load->model(array('M_penduduk', 'M_informasi'));
 	}
-	public function index()
-	{
+	
+	public function index(){
 		//$this->load->view('welcome_message');
 		$data['page'] 			= "BAAKU";
 		$data['judul'] 			= "Data Penduduk";
@@ -59,7 +59,6 @@ class Penduduk extends CI_Controller {
 		$this->template->views('penduduk/view', $data);
 	}
 	
-
     public function detail() {
         //$this->load->view('welcome_message');
 		$data['page'] 			= "BAAKU";
