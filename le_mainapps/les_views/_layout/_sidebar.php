@@ -64,31 +64,31 @@
             </a>
             <ul class="nav nav-treeview" style="font-size:14px; padding-left:18px;">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>penduduk" class="nav-link">
+                <a href="<?php echo base_url(); ?>Penduduk" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>Penduduk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>keluarga" class="nav-link">
+                <a href="<?php echo base_url(); ?>Keluarga" class="nav-link">
                   <i class="fa fa-users nav-icon"></i>
                   <p>Keluarga</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fa fa-venus-mars nav-icon"></i>
                   <p>Rumah Tangga</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fa fa-sitemap nav-icon"></i>
                   <p>Kelompok</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fa fa-podcast nav-icon"></i>
                   <p>Calon Pemilih</p>
                 </a>
@@ -106,53 +106,29 @@
             </a>
             <ul class="nav nav-treeview " style="font-size:14px; padding-left:18px;">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Surat Ket. Lahir</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Surat Ket. Lahir Mati</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Surat Ket. Kematian</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/sliders.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>Surat/SuratNikah" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Surat Ket. Nikah</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="pages/UI/modals.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modals & Alerts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/navbar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Navbar & Tabs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/timeline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Timeline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/ribbons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ribbons</p>
-                </a>
-              </li> -->
             </ul>
           </li>
           <!-- <li class="nav-item has-treeview ">

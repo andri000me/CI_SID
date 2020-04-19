@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<input type="hidden" class="form-control" name="id" id="id" value="">
 										<input type="text" class="form-control title" name="nama" id="nama"
 											value="" placeholder="Pilih Penduduk" required>
-										<input type="text" class="form-control" name="id_cluster" id="id_cluster"
+										<input type="hidden" class="form-control" name="id_cluster" id="id_cluster"
 											value="">
 									</div>
 									<div class="form-group row">

@@ -161,5 +161,22 @@
 
 </script>
 
+<script>
+$(document).ready(function(){
+    $('input[name="calon_pria"]').click(function(){
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".form-pria").not(targetBox).hide();
+        $(targetBox).show();
+    });
+	$('input[name="calon_wanita"]').click(function(){
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".form-wanita").not(targetBox).hide();
+        $(targetBox).show();
+    });
+});
+</script>
+
 
 
